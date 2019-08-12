@@ -18,7 +18,7 @@ public class MainApp {
 
 			System.out.println("======================================");
 
-			stack = new MyStack();
+			stack = new MyStack(3);
 			stack.push("Hello");
 
 			System.out.println(stack.pop());

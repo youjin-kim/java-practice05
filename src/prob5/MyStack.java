@@ -5,17 +5,27 @@ public class MyStack {
 	private int top = -1;
 	private String[] buffer;
 	
+	public MyStack() {}
 	
 	public MyStack(int size) {
-		this.buffer = new String[size+2];
-	}
-	
-	public MyStack() {
-		this.buffer = new String[2];
+		buffer = new String[size];
 	}
 
 	public void push(String data) {
+		
+		String[] temp = buffer;
+		
+		if(top >= buffer.length-1) {
+			buffer =  new String[top+2];
+			
+			for(int i=0; i<temp.length; i++) {
+				buffer[i] = temp[i]; 
+			}
+		}
+		
 		buffer[++top] = data;
+
+			
 	}
 	
 	public boolean isEmpty() {
@@ -28,11 +38,16 @@ public class MyStack {
 	}
 	
 	public String pop() throws MyStackException {
+		String data;
+		
 		if(top < 0) { 
-			return "stack is empty!";
+			throw new MyStackException("stack is empty!");
 		}
+		
 		else {
-			return buffer[top--];
+			data = buffer[top];
+			buffer[top--] = null;
+			return data;
 		}
 	}
 
